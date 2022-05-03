@@ -32,7 +32,7 @@ jobs:
       - name: Render document
         uses: lc5415/rmarkdown-action@v1
         with:
-          input_file: R/report.Rmd
+          input_file: ./R/report.Rmd
 	  output_format: html_document
           output_file: index.html
         
