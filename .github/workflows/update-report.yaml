@@ -11,5 +11,5 @@ jobs:
       - name: Render document
         uses: lc5415/rmarkdown-action@v1
         with:
-          input_file: path/to/my_doc.Rmd
+          input_file: R/report.Rmd
 	  output_format: pdf_document
