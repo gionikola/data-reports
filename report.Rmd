@@ -1,0 +1,34 @@
+---
+title: "**Report**"
+author: |
+        | Giorgi Nikolaishvili
+        | University of Oregon
+date: "Spring 2022"
+output: 
+  html_document:
+    theme: flatly  
+    includes:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+      
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T, warning = F, message = F, cache = T)
+```
+
+```{r}
+library(pacman) 
+p_load(dplyr, ggplot2)
+```
+
+## Test
+
+test.
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+```
+
