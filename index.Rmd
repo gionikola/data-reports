@@ -1,9 +1,8 @@
 ---
-title: "**Report**"
+title: "**Daily Economic Data Report**"
 author: |
         | Giorgi Nikolaishvili
-        | University of Oregon
-date: "Spring 2022"
+date: "`r Sys.Date()`"
 output: 
   html_document:
     theme: flatly  
@@ -19,16 +18,20 @@ output:
 knitr::opts_chunk$set(echo = T, warning = F, message = F, cache = T)
 ```
 
-```{r}
+```{r include=FALSE}
 library(pacman) 
-p_load(dplyr, ggplot2)
+p_load(dplyr, ggplot2, fredr)
 ```
 
-## Test
-
-test.
-
-```{r}
-ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+```{r echo=FALSE}
+data <- fredr(
+          series_id = "SOFR",
+          observation_start = as.Date(Sys.Date() - 50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line() +
+  labs(x = "Date", y = "Percent", color = "Series", title = "Secured Overnight Financing Rate") + 
+  theme_minimal() 
 ```
 
