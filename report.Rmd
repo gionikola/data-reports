@@ -17,8 +17,11 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = T, warning = F, message = F, cache = T)
+```
+
+```{r}
 library(pacman) 
-p_load(tidyverse)
+p_load(dplyr, ggplot2)
 ```
 
 ## Test
