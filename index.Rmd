@@ -19,19 +19,68 @@ knitr::opts_chunk$set(echo = T, warning = F, message = F, cache = T)
 ```
 
 ```{r include=FALSE}
+# Load packages 
 library(pacman) 
 p_load(dplyr, ggplot2, fredr)
+# Set FRED API key 
+fredr_set_key("cbd3662cc6a06560acacf323fe5ae37a")
 ```
 
-```{r echo=FALSE}
+## Daily Series
+
+```{r SOFR, echo=FALSE}
 data <- fredr(
           series_id = "SOFR",
           observation_start = as.Date(Sys.Date() - 50),
           observation_end = as.Date(Sys.Date())
         )
 ggplot(data, aes(x = date, y = value, color = series_id) ) +
-  geom_line() +
+  geom_line(size = 1) +
   labs(x = "Date", y = "Percent", color = "Series", title = "Secured Overnight Financing Rate") + 
+  theme_minimal() 
+```
+
+
+## Weekly Series 
+
+```{r WEI, echo=FALSE}
+data <- fredr(
+          series_id = "WEI",
+          observation_start = as.Date(Sys.Date() - 7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", y = "Index", color = "Series", title = "Weekly Economic Index (Lewis-Mertens-Stock)") + 
+  theme_minimal() 
+```
+
+## Monthly Series
+
+```{r HQMCB10YR, echo=FALSE}
+data <- fredr(
+          series_id = "HQMCB10YR",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", y = "Percent", color = "Series", title = "10-Year High Quality Market (HQM) Corporate Bond Spot Rate") + 
+  theme_minimal() 
+```
+
+```{r H8B1023NCBCMG, echo=FALSE}
+data <- fredr(
+          series_id = "H8B1023NCBCMG",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Percentage Change at Annual Rate", 
+       color = "Series", 
+       title = "Commercial and Industrial Loans, All Commercial Banks") + 
   theme_minimal() 
 ```
 
