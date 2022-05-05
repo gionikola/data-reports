@@ -57,15 +57,144 @@ ggplot(data, aes(x = date, y = value, color = series_id) ) +
 
 ## Monthly Series
 
-```{r HQMCB10YR, echo=FALSE}
+```{r BBKMGDP, echo=FALSE}
 data <- fredr(
-          series_id = "HQMCB10YR",
+          series_id = "BBKMGDP",
           observation_start = as.Date(Sys.Date() - 4*7*50),
           observation_end = as.Date(Sys.Date())
         )
 ggplot(data, aes(x = date, y = value, color = series_id) ) +
   geom_line(size = 1) +
-  labs(x = "Date", y = "Percent", color = "Series", title = "10-Year High Quality Market (HQM) Corporate Bond Spot Rate") + 
+  labs(x = "Date", 
+       y = "Annualized Percent Change from Preceding Period", 
+       color = "Series", 
+       title = "Brave-Butters-Kelley (US) Real Gross Domestic Product (Seasonally Adjusted)") + 
+  theme_minimal() 
+```
+
+```{r IGREA, echo=FALSE}
+data <- fredr(
+          series_id = "IGREA",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Index", 
+       color = "Series", 
+       title = "Index of Global Real Economic Activity") + 
+  theme_minimal() 
+```
+
+```{r HQMCB, echo=FALSE}
+data_2yr <- fredr(
+              series_id = "HQMCB2YR",
+              observation_start = as.Date(Sys.Date() - 4*7*50),
+              observation_end = as.Date(Sys.Date())
+            )
+data_3yr <- fredr(
+              series_id = "HQMCB3YR",
+              observation_start = as.Date(Sys.Date() - 4*7*50),
+              observation_end = as.Date(Sys.Date())
+            )
+data_10yr <- fredr(
+              series_id = "HQMCB10YR",
+              observation_start = as.Date(Sys.Date() - 4*7*50),
+              observation_end = as.Date(Sys.Date())
+            )
+data_15yr <- fredr(
+              series_id = "HQMCB15YR",
+              observation_start = as.Date(Sys.Date() - 4*7*50),
+              observation_end = as.Date(Sys.Date())
+            )
+data_25yr <- fredr(
+              series_id = "HQMCB25YR",
+              observation_start = as.Date(Sys.Date() - 4*7*50),
+              observation_end = as.Date(Sys.Date())
+            )
+data <- rbind(data_2yr, data_3yr, data_10yr, data_15yr, data_25yr)
+
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", y = "Percent", color = "Series", title = "High Quality Market (HQM) Corporate Bond Spot Rate") + 
+  theme_minimal() 
+```
+
+```{r EMVOVERALLEMV, echo=FALSE}
+data <- fredr(
+          series_id = "EMVOVERALLEMV",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Index", 
+       color = "Series", 
+       title = "Equity Market Volatility Tracker: Overall") + 
+  theme_minimal() 
+```
+
+```{r EXPINF, echo=FALSE}
+data_2yr <- fredr(
+          series_id = "EXPINF2YR",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+data_5yr <- fredr(
+          series_id = "EXPINF5YR",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+data_10yr <- fredr(
+          series_id = "EXPINF10YR",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+data_20yr <- fredr(
+          series_id = "EXPINF20YR",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+data <- rbind(data_2yr, data_5yr, data_10yr, data_20yr)
+
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Percent", 
+       color = "Series", 
+       title = "Expected Inflation") + 
+  theme_minimal() 
+```
+
+```{r ATLSBUSRGEP, echo=FALSE}
+data <- fredr(
+          series_id = "ATLSBUSRGEP",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Percent", 
+       color = "Series", 
+       title = "Business Expectations: Sales Revenue Growth") + 
+  theme_minimal() 
+```
+
+```{r ATLSBUEGEP, echo=FALSE}
+data <- fredr(
+          series_id = "ATLSBUEGEP",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Percent", 
+       color = "Series", 
+       title = "Business Expectations: Employment Growth") + 
   theme_minimal() 
 ```
 
@@ -81,6 +210,21 @@ ggplot(data, aes(x = date, y = value, color = series_id) ) +
        y = "Percentage Change at Annual Rate", 
        color = "Series", 
        title = "Commercial and Industrial Loans, All Commercial Banks") + 
+  theme_minimal() 
+```
+
+```{r H8B1247NCBCMG, echo=FALSE}
+data <- fredr(
+          series_id = "H8B1247NCBCMG",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Percentage Change at Annual Rate", 
+       color = "Series", 
+       title = "Consumer Loans: Credit Cards and Other Revolving Plans, All Commercial Banks") + 
   theme_minimal() 
 ```
 
