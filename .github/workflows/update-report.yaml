@@ -14,10 +14,12 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown","pacman"))'
-      - name: Render README
+      - name: Render rmd
         run: Rscript -e 'rmarkdown::render("report.Rmd")'
       - name: Commit results
         run: |
-          git add report.html
-          git commit report.md -m 'Re-build report.Rmd' || echo "No changes to commit"
-          git push origin || echo "No changes to commit"
+          git config --local user.email "actions@github.com"
+          git config --local user.name actions-user
+          git add --all
+          git commit -am "Update report"
+          git push origin main
