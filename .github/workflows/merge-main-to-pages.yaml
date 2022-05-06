@@ -1,8 +1,9 @@
-name: Merge main branch to gh-pages
 on:
-  push:
-    branches:
-      - '*'
+  schedule:
+    - cron: "0 12 * * *"
+
+name: Merge main branch to gh-pages
+
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
