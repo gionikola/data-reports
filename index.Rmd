@@ -15,7 +15,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = T, warning = F, message = F, cache = T)
+knitr::opts_chunk$set(echo = T, warning = F, message = F, cache = F)
 ```
 
 ```{r include=FALSE}
@@ -28,10 +28,22 @@ fredr_set_key("cbd3662cc6a06560acacf323fe5ae37a")
 
 ## Daily Series
 
+```{r EFFR, echo=FALSE}
+data <- fredr(
+          series_id = "EFFR",
+          observation_start = as.Date(Sys.Date() - 100),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", y = "Percent", color = "Series", title = "Effective Federal Funds Rate") + 
+  theme_minimal() 
+```
+
 ```{r SOFR, echo=FALSE}
 data <- fredr(
           series_id = "SOFR",
-          observation_start = as.Date(Sys.Date() - 50),
+          observation_start = as.Date(Sys.Date() - 100),
           observation_end = as.Date(Sys.Date())
         )
 ggplot(data, aes(x = date, y = value, color = series_id) ) +
