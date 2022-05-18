@@ -21,7 +21,8 @@ knitr::opts_chunk$set(echo = T, warning = F, message = F, cache = F)
 ```{r include=FALSE}
 # Load packages 
 library(pacman) 
-p_load(dplyr, ggplot2, fredr)
+p_load(dplyr, ggplot2)
+library(fredr)
 # Set FRED API key 
 fredr_set_key("cbd3662cc6a06560acacf323fe5ae37a")
 ```
