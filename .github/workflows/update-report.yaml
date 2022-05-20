@@ -1,6 +1,7 @@
 on:
-  schedule:
-    - cron: "0 8 * * *"
+  #schedule:
+    push:
+    #- cron: "0 8 * * *"
 
 name: Render Report
 
@@ -13,7 +14,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install packages
-        run: Rscript -e 'install.packages(c("rmarkdown","pacman","fredr"))'
+        run: Rscript -e 'install.packages(c("rmarkdown","pacman","httr", "curl", "fredr"))'
       - name: Load fredr
         run: Rscript -e 'library(fredr)'
       - name: Render rmd
