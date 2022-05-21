@@ -1,0 +1,16 @@
+Package: dataReports
+Title: Daily Economic Data Report
+Version: 0.0.0.9000
+Authors@R: 
+    person("Giorgi", "Nikolaishvili", , "gnikolai@uoregon.edu", role = c("aut", "cre"))
+Description: Produce "Daily Economic Data Report" using FRED data.
+License: `use_mit_license()`
+Depends:
+    R (>= 3.2.2)
+Imports:
+    rmarkdown,
+    pacman, 
+    fredr
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.0
