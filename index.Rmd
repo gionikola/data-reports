@@ -30,29 +30,29 @@ fredr_set_key("cbd3662cc6a06560acacf323fe5ae37a")
 ## Daily Series
 
 ```{r EFFR, echo=FALSE}
-data <- fredr(
+data_effr <- fredr(
           series_id = "EFFR",
           observation_start = as.Date(Sys.Date() - 100),
           observation_end = as.Date(Sys.Date())
         )
-ggplot(data, aes(x = date, y = value, color = series_id) ) +
-  geom_line(size = 1) +
-  labs(x = "Date", y = "Percent", color = "Series", title = "Effective Federal Funds Rate") + 
-  theme_minimal() 
-```
-
-```{r SOFR, echo=FALSE}
-data <- fredr(
+data_sofr <- fredr(
           series_id = "SOFR",
           observation_start = as.Date(Sys.Date() - 100),
           observation_end = as.Date(Sys.Date())
         )
+data_obfr <- fredr(
+          series_id = "OBFR",
+          observation_start = as.Date(Sys.Date() - 100),
+          observation_end = as.Date(Sys.Date())
+        )
+data <- rbind(data_effr, data_sofr)
+data <- rbind(data, data_obfr)
+
 ggplot(data, aes(x = date, y = value, color = series_id) ) +
-  geom_line(size = 1) +
-  labs(x = "Date", y = "Percent", color = "Series", title = "Secured Overnight Financing Rate") + 
+  geom_line(size = 1, alpha = 0.8) +
+  labs(x = "Date", y = "Percent", color = "Series", title = "Overnight Bank Lending Rates") + 
   theme_minimal() 
 ```
-
 
 ## Weekly Series 
 
@@ -69,6 +69,31 @@ ggplot(data, aes(x = date, y = value, color = series_id) ) +
 ```
 
 ## Monthly Series
+
+```{r moneystock, echo=FALSE}
+data_m1 <- fredr(
+          series_id = "WM1NS",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        ) %>% 
+  mutate(series_id = "M1")
+data_m2 <- fredr(
+          series_id = "WM2NS",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        ) %>% 
+  mutate(series_id = "M2") %>%
+  mutate(value = value - data_m1$value)
+data <- rbind(data_m2, data_m1)
+
+ggplot(data, aes(x = date, y = value/1000, fill = series_id) ) +
+  geom_area(position = position_stack(reverse = TRUE)) +
+  labs(x = "Date", 
+       y = "Trillions of Dollars", 
+       fill = "Series", 
+       title = "Money Supply") + 
+  theme_minimal() 
+```
 
 ```{r BBKMGDP, echo=FALSE}
 data <- fredr(
