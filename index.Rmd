@@ -54,6 +54,62 @@ ggplot(data, aes(x = date, y = value, color = series_id) ) +
   theme_minimal() 
 ```
 
+```{r treasury, echo=FALSE}
+series = c("DGS1", "DGS2", "DGS3", "DGS10", "DGS20", "DGS30")
+data_1yr <- fredr(
+              series_id = series[1],
+              observation_start = as.Date(Sys.Date() - 100),
+              observation_end = as.Date(Sys.Date())
+            )
+data_2yr <- fredr(
+              series_id = series[2],
+              observation_start = as.Date(Sys.Date() - 100),
+              observation_end = as.Date(Sys.Date())
+            )
+data_3yr <- fredr(
+              series_id = series[3],
+              observation_start = as.Date(Sys.Date() - 100),
+              observation_end = as.Date(Sys.Date())
+            )
+data_10yr <- fredr(
+              series_id = series[4],
+              observation_start = as.Date(Sys.Date() - 100),
+              observation_end = as.Date(Sys.Date())
+            )
+data_20yr <- fredr(
+              series_id = series[5],
+              observation_start = as.Date(Sys.Date() - 100),
+              observation_end = as.Date(Sys.Date())
+            )
+data_30yr <- fredr(
+              series_id = series[6],
+              observation_start = as.Date(Sys.Date() - 100),
+              observation_end = as.Date(Sys.Date())
+            )
+data <- rbind(data_1yr, data_2yr, data_3yr, data_10yr, data_20yr, data_30yr)
+
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", y = "Percent", color = "Constant Maturity", title = "Market Yield on U.S. Treasury Securities ") + 
+  theme_minimal() +
+  scale_color_discrete(limits = series)
+```
+
+```{r SP500, echo = FALSE}
+data <- fredr(
+          series_id = "SP500",
+          observation_start = as.Date(Sys.Date() - 100),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Index", 
+       color = "Series", 
+       title = "S&P 500") + 
+  theme_minimal() 
+```
+
 ## Weekly Series 
 
 ```{r WEI, echo=FALSE}
@@ -69,6 +125,21 @@ ggplot(data, aes(x = date, y = value, color = series_id) ) +
 ```
 
 ## Monthly Series
+
+```{r case-shiller, echo = FALSE}
+data <- fredr(
+          series_id = "CSUSHPISA",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Index", 
+       color = "Series", 
+       title = "Case-Shiller U.S. National Home Price Index (Seasonally Adj.)") + 
+  theme_minimal() 
+```
 
 ```{r moneystock, echo=FALSE}
 data_m1 <- fredr(
