@@ -124,7 +124,97 @@ ggplot(data, aes(x = date, y = value, color = series_id) ) +
   theme_minimal() 
 ```
 
+```{r initial_claims, echo = FALSE}
+data <- fredr(
+          series_id = "ICSA",
+          observation_start = as.Date(Sys.Date() - 7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Thousands of Claims", 
+       color = "Series", 
+       title = "Initial Claims") + 
+  theme_minimal() 
+```
+
 ## Monthly Series
+
+```{r total_nonfarm, echo = FALSE}
+data <- fredr(
+          series_id = "PAYEMS",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Thousands of Persons", 
+       color = "Series", 
+       title = "All Employees, Total Nonfarm (Seasonally Adj.)") + 
+  theme_minimal() 
+```
+
+```{r industrial_production, echo = FALSE}
+data <- fredr(
+          series_id = "INDPRO",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Index 2017 = 100", 
+       color = "Series", 
+       title = "Industrial Production: Total Index (Seasonally Adj.)") + 
+  theme_minimal() 
+```
+
+```{r total_manufacturing, echo = FALSE}
+data <- fredr(
+          series_id = "AMTMNO",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Millions of Dollars", 
+       color = "Series", 
+       title = "Manufacturers' New Orders: Total Manufacturing") + 
+  theme_minimal() 
+```
+
+```{r mediancpi, echo = FALSE}
+data <- fredr(
+          series_id = "MEDCPIM158SFRBCLE",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Percent Change at Annual Rate", 
+       color = "Series", 
+       title = "Median Consumer Price Index (Seasonally Adj.)") + 
+  theme_minimal() 
+```
+
+```{r existing_home_sales, echo = FALSE}
+data <- fredr(
+          series_id = "EXHOSLUSM495S",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Number of Units", 
+       color = "Series", 
+       title = "Existing Home Sales (Seasonally Adj. Annual Rate)") + 
+  theme_minimal() 
+```
 
 ```{r case-shiller, echo = FALSE}
 data <- fredr(
@@ -138,6 +228,21 @@ ggplot(data, aes(x = date, y = value, color = series_id) ) +
        y = "Index", 
        color = "Series", 
        title = "Case-Shiller U.S. National Home Price Index (Seasonally Adj.)") + 
+  theme_minimal() 
+```
+
+```{r recession_probabilities, echo = FALSE}
+data <- fredr(
+          series_id = "RECPROUSM156N",
+          observation_start = as.Date(Sys.Date() - 4*7*50),
+          observation_end = as.Date(Sys.Date())
+        )
+ggplot(data, aes(x = date, y = value, color = series_id) ) +
+  geom_line(size = 1) +
+  labs(x = "Date", 
+       y = "Percent", 
+       color = "Series", 
+       title = "Smoothed U.S. Recession Probabilities") + 
   theme_minimal() 
 ```
 
